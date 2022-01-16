@@ -16,7 +16,6 @@ WORKDIR /app
 # Copy our source code
 COPY . /app
 RUN pip install -r requirements.txt
-RUN ["chmod", "+x", "/node/execure.sh"]
 # COPY /Score.txt .
 # Run the application
 CMD ["python", "MainScores.py"]
