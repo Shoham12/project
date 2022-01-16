@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    environment {
+        dockerImage = ''
+        registry = 'shohamlan/q4'
+    }
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Shoham12/project'
+            }
+        }
+        stage('Building Docker Image') {
+            steps {
+                sh 'pwd'
+                sh 'ls'
+                sh 'docker build -t show .'
+                sh 'docker run -d -p 8777:5000 show'
+            }
+        }
+    }
+}
