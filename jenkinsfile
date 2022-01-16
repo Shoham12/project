@@ -17,7 +17,12 @@ pipeline {
                 sh 'pwd'
                 sh 'ls'
                 sh 'docker build -t show .'
-                sh 'docker run -d -p 8777:5000 show'
+                sh 'docker run -d -p 8777:5000 flaskapp'
+            }
+        }
+        stage('Run Docker') {
+            steps {
+                sh 'docker run -d -p 8777:5000 flaskapp'
             }
         }
     }
