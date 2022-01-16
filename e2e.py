@@ -3,7 +3,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import os
 import time
 import chromedriver_binary
-import chromedriver_autoinstaller
+# import chromedriver_autoinstaller
 
 
 class e2e:
@@ -11,12 +11,12 @@ class e2e:
         self.difficulty = 7
 
     def test_scores_service(self, url):
-        # options = webdriver.ChromeOptions()
-        # options.headless = True
-        # browser = webdriver.Chrome(executable_path="../../Desktop/chromedriver4", options=options)
+        options = webdriver.ChromeOptions()
+        options.headless = True
+        browser = webdriver.Chrome(executable_path="../../Desktop/chromedriver4", options=options)
         # chromedriver_autoinstaller.install()
         # browser = webdriver.Chrome()
-        browser = webdriver.Remote('http://selenium:4444/wd/hub', desired_capabilities=DesiredCapabilities.CHROME)
+        # browser = webdriver.Remote('http://selenium:4444/wd/hub', desired_capabilities=DesiredCapabilities.CHROME)
         browser.get(url)
         # time.sleep(3)
         a = browser.find_element_by_id("score").text
@@ -27,7 +27,7 @@ class e2e:
             return False
 
     def main_function(self):
-        app_url = "http://127.0.0.1:5000/"
+        app_url = "http://127.0.0.1:8777/"
         test_func = self.test_scores_service(app_url)
         if not test_func:
             return -1
