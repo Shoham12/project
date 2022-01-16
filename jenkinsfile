@@ -1,11 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        dockerImage = ''
-        registry = 'shohamlan/q4'
-    }
-
     stages {
         stage('Git Checkout') {
             steps {
@@ -14,15 +9,23 @@ pipeline {
         }
         stage('Building Docker Image') {
             steps {
-                sh 'pwd'
-                sh 'ls'
-                sh 'docker build -t show .'
-                sh 'docker run -d -p 8777:5000 flaskapp'
+                sh 'docker build -t shohamlan/q4:flaskapp .'
             }
         }
         stage('Run Docker') {
             steps {
-                sh 'docker run -d -p 8777:5000 flaskapp'
+                sh 'docker run -d -p 8777:5000 shohamlan/q4:flaskapp'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'python e2e.py'
+            }
+        }
+        stage('Final') {
+            steps {
+                sh 'docker stop $(docker ps -a -q --filter ancestor=shohamlan/q4:flaskapp --format="{{.ID}}")'
+                sh 'docker push shohamlan/q4:flaskapp'
             }
         }
     }
