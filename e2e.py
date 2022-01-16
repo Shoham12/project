@@ -11,7 +11,7 @@ class e2e:
     def test_scores_service(self, url):
         options = webdriver.ChromeOptions()
         options.headless = True
-        browser = webdriver.Chrome(executable_path="../../Desktop/chromedriver4", options=options)
+        browser = webdriver.Chrome(executable_path="/Users/shohamlandau/Desktop/chromedriver4", options=options)
         # chromedriver_autoinstaller.install()
         # browser = webdriver.Chrome()
         # browser = webdriver.Remote('http://selenium:4444/wd/hub', desired_capabilities=DesiredCapabilities.CHROME)
